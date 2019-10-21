@@ -1,0 +1,13 @@
+
+# http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+
+aptcachetime: 3600
+
+locales:
+  - "en_US.UTF-8"
+  - "es_ES.UTF-8"
+  - "pt_PT.UTF-8"
+timezone: "Europe/Lisbon"
+
+node:
+  version: "10.15.1"

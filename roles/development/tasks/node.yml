@@ -1,0 +1,45 @@
+---
+# https://github.com/mklement0/n-install
+
+- name: "Check if N is installed"
+  shell: hash n
+  register: n_hash_check
+  failed_when: n_hash_check.rc > 1
+  changed_when: n_hash_check.rc == 1
+
+- name: "Download N installation script"
+  get_url:
+    url: "https://git.io/n-install"
+    dest: /tmp/n.sh
+    mode: u+rwx
+  when: n_hash_check.rc == 1
+
+- name: "Install N"
+  shell: "/tmp/n.sh -q"
+  args:
+  when: n_hash_check.rc == 1
+
+- name: "Clean N install file"
+  file:
+    path: /tmp/n.sh
+    state: absent
+
+- name: "Check if Node.js is at version {{ node.version }}"
+  shell: "node --version | grep {{ node.version }}"
+  register: node_version
+  failed_when: node_version.rc > 1
+  changed_when: node_version.rc == 1
+
+- name: "Set Node.js version to '{{ node.version }}'"
+  command: "n {{ node.version }}"
+  when: node_version.rc == 1
+
+- name: "Check if NPM is at version {{ npm.version }}"
+  shell: "npm --version | grep {{ npm.version }}"
+  register: npm_version
+  failed_when: npm_version.rc > 1
+  changed_when: npm_version.rc == 1
+
+- name: "Set NPM to version '{{ npm.version }}'"
+  command: "npm install -g npm@{{ npm.version }}"
+  when: npm_version.rc == 1

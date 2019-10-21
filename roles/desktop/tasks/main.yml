@@ -1,0 +1,39 @@
+
+- name: "Install common desktop packages"
+  apt:
+    pkg:
+      - inotify-tools
+      - pinta
+      - vlc
+    state: latest
+    update_cache: true
+    cache_valid_time: "{{ aptcachetime }}"
+  tags: desktop
+  become: true
+
+- name: "Install Firefox"
+  apt:
+    pkg: firefox
+    state: latest
+    update_cache: true
+    cache_valid_time: "{{ aptcachetime }}"
+  tags: firefox
+  become: true
+
+- name: "Install Thunderbird"
+  apt:
+    pkg: thunderbird
+    state: latest
+    update_cache: true
+    cache_valid_time: "{{ aptcachetime }}"
+  tags: thunderbird
+  become: true
+
+- include: "libreoffice.yml"
+  tags: libreoffice
+
+- include: "skype.yml"
+  tags: skype
+
+- include: "spotify.yml"
+  tags: spotify

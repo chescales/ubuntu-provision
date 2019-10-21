@@ -1,0 +1,13 @@
+---
+
+- name: "Add LibreOffice repo"
+  apt_repository:
+    repo: ppa:libreoffice/ppa
+  become: true
+
+- name: "Install LibreOffice"
+  apt:
+    pkg: libreoffice
+    state: latest
+    update_cache: true
+  become: true

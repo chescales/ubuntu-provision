@@ -1,0 +1,8 @@
+# Configure the variables in each one of the roles
+- name: "Local ubuntu provision"
+  hosts: local
+  connection: local
+  roles:
+    - common
+    - desktop
+    - development

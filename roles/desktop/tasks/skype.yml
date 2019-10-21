@@ -1,0 +1,20 @@
+---
+
+- name: "Skype GPG key"
+  apt_key:
+    id: 1F3045A5DF7587C3
+    url: https://repo.skype.com/data/SKYPE-GPG-KEY
+    state: present
+  become: true
+
+- name: "Add Skype repo"
+  apt_repository:
+    repo: deb [arch=amd64] https://repo.skype.com/deb stable main
+  become: true
+
+- name: "Install Skype"
+  apt:
+    pkg: skypeforlinux
+    state: latest
+    update_cache: true
+  become: true

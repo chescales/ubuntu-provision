@@ -1,0 +1,16 @@
+# No automated way to do this yet
+- name: "Opening JetBrains Toolbox download site"
+  command: "firefox -new-tab https://www.jetbrains.com/toolbox-app/"
+  tags:
+    - ide
+    - jetbrains
+    - pycharm
+
+- include: "virtualbox.yml"
+  tags: virtualbox
+
+- include: "vagrant.yml"
+  tags: vagrant
+
+- include: "node.yml"
+  tags: node
